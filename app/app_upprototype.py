@@ -8,8 +8,12 @@ import time
 #model and default image paths
 
 MODEL_PATH = "/home/nikita/code/PlatoIsDead/Project/Models/fastai_all_data.pkl"
-DEFAULT_IMAGE_PATH = "./test_image.jpg"
-MAX_FILE_SIZE = 10 * 1024 * 1024          #unlikely anyone uploads a larger image, tell me if needs removing website from which i copy logic had this didnt bother removing
+DEFAULT_IMAGE_PATH = "/home/nikita/code/PlatoIsDead/fake_spots2/app/test_image.jpg"
+DEFAULT_IMAGE_PATH2 = "/home/nikita/code/PlatoIsDead/fake_spots2/app/output.png"
+MAX_FILE_SIZE = 10 * 1024 * 1024
+
+if os.path.exists(DEFAULT_IMAGE_PATH):
+    default_img = Image.open(DEFAULT_IMAGE_PATH).convert("RGB")
 #page layout
 st.set_page_config(layout="wide", page_title="Face Retouching Detector")
 
@@ -70,8 +74,15 @@ def process_image(upload):
 
         #FIX LATER
         #EITHER CROPPED IMAGE OR PHOTOPHOP PIXELS HIGHLIGHT
-        col2.write("Drivers of model decigion")
-        col2.image(image, use_container_width=True)
+        col2.write("Drivers of model decision")
+
+        #needs rework loads default after processing
+        if os.path.exists(DEFAULT_IMAGE_PATH2):
+            output_img = Image.open(DEFAULT_IMAGE_PATH2).convert("RGB")
+            col2.image(output_img, use_container_width=True)
+        else:
+            col2.warning("Output image not found.")
+
 
         with st.sidebar:
             st.write("### Prediction")
