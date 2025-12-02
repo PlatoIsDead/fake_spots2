@@ -1,0 +1,28 @@
+wheel
+nbresult
+colorama
+ipdb
+ipykernel
+yapf
+matplotlib
+pytest
+seaborn==0.13.2
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.13.1
+scikit-learn==1.6.1
+google-cloud-bigquery
+google-cloud-storage
+google-api-core==2.28.1
+googleapis-common-protos==1.68.0
+protobuf
+h5py==3.13.0
+db-dtypes
+uvicorn==0.38.0
+fastapi==0.121.1
+streamlit==1.51.0
+pillow==11.1.0
+# Trick to install the version of Tensorflow depending on your processor: darwin == Mac, ARM == M1
+tensorflow-macos==2.16.2; sys_platform == 'darwin' and 'ARM' in platform_version # Mac M-chips
+tensorflow==2.16.2; sys_platform == 'darwin' and 'ARM' not in platform_version # Mac Intel chips
+tensorflow==2.16.2; sys_platform != 'darwin' # Windows & Ubuntu Intel chips

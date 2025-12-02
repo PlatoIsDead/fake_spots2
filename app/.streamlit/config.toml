@@ -1,0 +1,5 @@
+[theme]
+primaryColor = "#FFFFFF"          # Buttons, accents
+backgroundColor = "#600022"       # MAIN background
+secondaryBackgroundColor = "#52001C"   # SIDEBAR background
+textColor = "#FFFFFF"             # You need light text for dark backgrounds
