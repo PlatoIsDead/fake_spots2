@@ -1,5 +1,5 @@
 [theme]
-primaryColor = "#FFFFFF"          # Buttons, accents
-backgroundColor = "#600022"       # MAIN background
-secondaryBackgroundColor = "#52001C"   # SIDEBAR background
+primaryColor = "#000000ff"          # Buttons, accents
+backgroundColor = "#ff914d4f"       # MAIN background
+secondaryBackgroundColor = "#ff313154"   # SIDEBAR background
 textColor = "#FFFFFF"             # You need light text for dark backgrounds
