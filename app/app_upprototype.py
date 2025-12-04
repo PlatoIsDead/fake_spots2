@@ -10,7 +10,6 @@ import time
 MODEL_PATH = "/home/nikita/code/PlatoIsDead/Project/Models/fastai_all_data.pkl"
 DEFAULT_IMAGE_PATH = "/home/nikita/code/PlatoIsDead/fake_spots2/app/test_image.jpg"
 DEFAULT_IMAGE_PATH2 = "/home/nikita/code/PlatoIsDead/fake_spots2/app/output.png"
-MAX_FILE_SIZE = 10 * 1024 * 1024
 
 if os.path.exists(DEFAULT_IMAGE_PATH):
     default_img = Image.open(DEFAULT_IMAGE_PATH).convert("RGB")
@@ -123,11 +122,6 @@ with st.sidebar.expander("ℹ️ Image Guidelines"):
 #
 
 if uploaded_file is not None:
-    if uploaded_file.size > MAX_FILE_SIZE:
-        st.error(
-            f"The uploaded file is too large. "
-            f"Please upload an image smaller than {MAX_FILE_SIZE/1024/1024:.1f}MB."
-        )
     else:
         process_image(uploaded_file)
 else:
