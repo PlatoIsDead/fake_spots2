@@ -1,37 +1,40 @@
-set_env:
-	pyenv virtualenv 3.12.9 fake_spots_env
-	pyenv local fake_spots_env
 
-reinstall_package:
-	@pip uninstall -y fsp || :
-	@pip install -e .
+default: pytest
 
-set_reqs:
-	python -m pip install --upgrade pip
+# default: pylint pytest
+
+# pylint:
+# 	find . -iname "*.py" -not -path "./tests/test_*" | xargs -n1 -I {}  pylint --output-format=colorized {}; true
+
+pytest:
+	echo "no tests"
+
+# ----------------------------------
+#         LOCAL SET UP
+# ----------------------------------
+
+install_requirements:
 	@pip install -r requirements.txt
 
-run_tests:
-	python test/super_test.py
+# ----------------------------------
+#         HEROKU COMMANDS
+# ----------------------------------
 
-install_docker:
-	docker build -t api/api .
+streamlit:
+	-@streamlit run app/app.py
 
-run_docker:
-	docker run -p 8080:8000 api
 
-run_api:
-	uvicorn api.api:app --reload
+# ----------------------------------
+#    LOCAL INSTALL COMMANDS
+# ----------------------------------
+install:
+	@pip install . -U
 
-deploy:
-	@echo ">>> Creating Artifact Registry repository (if not exists)..."
-	@gcloud artifacts repositories create $(DOCKER_REPO_NAME) --repository-format=docker \
-		--location=$(GCP_REGION) --description="My first repository for storing Docker images in GAR" || true
-
-	@echo ">>> Building Docker image..."
-	@docker build --platform linux/amd64 -t $(IMAGE_URI) .
-
-	@echo ">>> Pushing Docker image to Google Artifact Registry..."
-	@docker push $(IMAGE_URI)
-
-	@echo ">>> Deploying to Google Cloud Run with environment variables..."
-	@gcloud run deploy $(DOCKER_IMAGE_NAME) --image $(IMAGE_URI) --region $(GCP_REGION) --quiet --env-vars-file .env.yaml
+clean:
+	@rm -fr */__pycache__
+	@rm -fr __init__.py
+	@rm -fr build
+	@rm -fr dist
+	@rm -fr *.dist-info
+	@rm -fr *.egg-info
+	-@rm model.joblib
