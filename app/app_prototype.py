@@ -8,7 +8,7 @@ import traceback
 
 #api and default image paths
 API_URL = "https://fake-spots-image-prod-853522169535.europe-west1.run.app/Predict"
-DEFAULT_IMAGE_PATH = "/home/nikita/code/PlatoIsDead/fake_spots2/app/test_image.jpg"  # change if needed
+DEFAULT_IMAGE_PATH = "/home/nikita/code/PlatoIsDead/fake_spots2/app/test_image.png"  # change if needed
 
 #page layout
 st.set_page_config(layout="wide", page_title="Face Retouching Detector")
@@ -135,7 +135,7 @@ if submit_button and uploaded_file is not None:
 elif uploaded_file is None:
     #no upload yet -> show default demo image on load
     if os.path.exists(DEFAULT_IMAGE_PATH):
-        st.info("No upload detected. Showing demo on test_image.jpg.")
+        st.info(" :red[No upload detected. Showing demo on test_image.jpg.]")
         process_image(DEFAULT_IMAGE_PATH, is_demo=True)
     else:
         st.info("Please upload an image to get started.")
